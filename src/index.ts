@@ -2,6 +2,7 @@ import { getLocalIP } from './utils/getLocalIP';
 import * as net from 'net';
 import isPortTaken from './utils/isPortTaken';
 import { initPort, isDev } from './utils/constant';
+import {nanoid} from 'nanoid';
 
 const getServerPort = async (port = initPort): Promise<number> => {
 
@@ -63,10 +64,11 @@ getServerPort().then(serverPort => {
 
   client.write(JSON.stringify({
     type: 'client',
+    id: nanoid(),
     message: {
       content: 'join',
       port: serverPort
     }
   }))
 })
-
+ 
